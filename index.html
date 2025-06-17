@@ -74,131 +74,13 @@
   </div>
 
   <script>
-    const tabela = {
-      carboidratos: {
-        "Arroz branco/integral": 100,
-        "Macaxeira cozida": 100,
-        "Inhame cozido": 110,
-        "Macarrão cozido": 80,
-        "Aveia em flocos": 35,
-        "Cuscuz cozido": 110,
-        "Batata inglesa cozida": 170,
-        "Batata doce cozida": 150,
-        "Feijão cozido": 170,
-        "Milho de pipoca": 35,
-        "Abóbora cozida": 250,
-        "Pão tradicional/integral": 50,
-        "Pão francês": 50,
-        "Tapioca": 60
-      },
-      proteinas: {
-        "Peito de frango cozido/grelhado": 100,
-        "Carne bovina magra cozida/grelhada": 80,
-        "Tilapia grelhada/assada": 120,
-        "Salmão grelhado/assado": 70,
-        "Salmão cru": 100,
-        "Peito de peru": 150,
-        "Clara de ovo": 300,
-        "Ovo inteiro": 120
-      },
-      frutas: {
-        "Banana": 100,
-        "Maçã": 130,
-        "Abacaxi": 150,
-        "Melancia": 300,
-        "Melão": 280,
-        "Mamão": 200,
-        "Morango": 300,
-        "Uva": 150,
-        "Kiwi": 150,
-        "Manga": 150,
-        "Abacate": 60
-      },
-      leite: {
-        "Queijo mussarela tradicional": 30,
-        "Queijo mussarela light": 40,
-        "Queijo minas padrão": 30,
-        "Ricota": 60,
-        "Cottage": 120,
-        "Leite desnatado": 300,
-        "Leite semi-desnatado": 250,
-        "Leite integral": 200,
-        "Requeijão tradicional": 30,
-        "Requeijão light": 60
-      }
-    };
-
-    const unidadesML = ["Leite desnatado", "Leite semi-desnatado", "Leite integral"];
-    const unidadesUN = { "Ovo inteiro": 60, "Clara de ovo": 30 };
-
-    function atualizarAlimentosOrigem() {
-      const grupo = document.getElementById('grupo').value;
-      const alimentoOrigem = document.getElementById('alimentoOrigem');
-      alimentoOrigem.innerHTML = '<option value="">Selecione o alimento da dieta</option>';
-      if (grupo && tabela[grupo]) {
-        Object.keys(tabela[grupo]).forEach(alimento => {
-          alimentoOrigem.innerHTML += `<option value="${alimento}">${alimento}</option>`;
-        });
-      }
-      atualizarAlimentosDestino();
-    }
-
-    function atualizarAlimentosDestino() {
-      const grupo = document.getElementById('grupo').value;
-      const alimentoDestino = document.getElementById('alimentoDestino');
-      alimentoDestino.innerHTML = '<option value="">Selecione o alimento de substituição</option>';
-      if (grupo && tabela[grupo]) {
-        Object.keys(tabela[grupo]).forEach(alimento => {
-          alimentoDestino.innerHTML += `<option value="${alimento}">${alimento}</option>`;
-        });
-      }
-    }
-
-    function atualizarPlaceholder() {
-      const alimento = document.getElementById('alimentoOrigem').value;
-      const input = document.getElementById('quantidadeOrigem');
-      if (unidadesML.includes(alimento)) {
-        input.placeholder = "Quantidade no plano (ml)";
-      } else if (Object.keys(unidadesUN).includes(alimento)) {
-        input.placeholder = "Quantidade no plano (unidades)";
-      } else {
-        input.placeholder = "Quantidade no plano (g)";
-      }
-    }
-
-    function calcularSubstituicao() {
-      const grupo = document.getElementById('grupo').value;
-      const alimentoOrigem = document.getElementById('alimentoOrigem').value;
-      const alimentoDestino = document.getElementById('alimentoDestino').value;
-      const quantidadeOrigemInput = document.getElementById('quantidadeOrigem').value;
-      const resultadoDiv = document.getElementById('resultado');
-      const quantidadeOrigem = parseFloat(quantidadeOrigemInput);
-
-      if (!grupo || !alimentoOrigem || !alimentoDestino || isNaN(quantidadeOrigem)) {
-        resultadoDiv.innerText = 'Por favor, preencha todos os campos corretamente.';
-        return;
-      }
-
-      let quantidadeOrigemGramas = quantidadeOrigem;
-      if (Object.keys(unidadesUN).includes(alimentoOrigem)) {
-        quantidadeOrigemGramas = quantidadeOrigem * unidadesUN[alimentoOrigem];
-      }
-
-      const quantidadeRefOrigem = tabela[grupo][alimentoOrigem];
-      const quantidadeRefDestino = tabela[grupo][alimentoDestino];
-
-      let novaQuantidade = (quantidadeRefDestino / quantidadeRefOrigem) * quantidadeOrigemGramas;
-
-      let unidade = "g";
-      if (unidadesML.includes(alimentoDestino)) {
-        unidade = "ml";
-      } else if (Object.keys(unidadesUN).includes(alimentoDestino)) {
-        unidade = "unidades";
-        novaQuantidade = novaQuantidade / unidadesUN[alimentoDestino];
-      }
-
-      resultadoDiv.innerText = `Quantidade equivalente: ${novaQuantidade.toFixed(1)} ${unidade} de ${alimentoDestino}`;
-    }
+    const tabela = {carboidratos:{"Arroz branco/integral":100,"Macaxeira cozida":100,"Inhame cozido":110,"Macarrão cozido":80,"Aveia em flocos":35,"Cuscuz cozido":110,"Batata inglesa cozida":170,"Batata doce cozida":150,"Feijão cozido":170,"Milho de pipoca":35,"Abóbora cozida":250,"Pão tradicional/integral":50,"Pão francês":50,"Tapioca":60},proteinas:{"Peito de frango cozido/grelhado":100,"Carne bovina magra cozida/grelhada":80,"Tilapia grelhada/assada":120,"Salmão grelhado/assado":70,"Salmão cru":100,"Peito de peru":150,"Clara de ovo":300,"Ovo inteiro":120},frutas:{"Banana":100,"Maçã":130,"Abacaxi":150,"Melancia":300,"Melão":280,"Mamão":200,"Morango":300,"Uva":150,"Kiwi":150,"Manga":150,"Abacate":60},leite:{"Queijo mussarela tradicional":30,"Queijo mussarela light":40,"Queijo minas padrão":30,"Ricota":60,"Cottage":120,"Leite desnatado":300,"Leite semi-desnatado":250,"Leite integral":200,"Requeijão tradicional":30,"Requeijão light":60}};
+    const unidadesML=["Leite desnatado","Leite semi-desnatado","Leite integral"];
+    const unidadesUN={"Ovo inteiro":60,"Clara de ovo":30};
+    function atualizarAlimentosOrigem(){const grupo=document.getElementById('grupo').value;const alimentoOrigem=document.getElementById('alimentoOrigem');alimentoOrigem.innerHTML='<option value="">Selecione o alimento da dieta</option>';if(grupo&&tabela[grupo]){Object.keys(tabela[grupo]).forEach(alimento=>{alimentoOrigem.innerHTML+=`<option value="${alimento}">${alimento}</option>`;});}atualizarAlimentosDestino();}
+    function atualizarAlimentosDestino(){const grupo=document.getElementById('grupo').value;const alimentoDestino=document.getElementById('alimentoDestino');alimentoDestino.innerHTML='<option value="">Selecione o alimento de substituição</option>';if(grupo&&tabela[grupo]){Object.keys(tabela[grupo]).forEach(alimento=>{alimentoDestino.innerHTML+=`<option value="${alimento}">${alimento}</option>`;});}}
+    function atualizarPlaceholder(){const alimento=document.getElementById('alimentoOrigem').value;const input=document.getElementById('quantidadeOrigem');if(unidadesML.includes(alimento)){input.placeholder="Quantidade no plano (ml)";}else if(Object.keys(unidadesUN).includes(alimento)){input.placeholder="Quantidade no plano (unidades)";}else{input.placeholder="Quantidade no plano (g)";}}
+    function calcularSubstituicao(){const grupo=document.getElementById('grupo').value;const alimentoOrigem=document.getElementById('alimentoOrigem').value;const alimentoDestino=document.getElementById('alimentoDestino').value;const quantidadeOrigemInput=document.getElementById('quantidadeOrigem').value;const resultadoDiv=document.getElementById('resultado');const quantidadeOrigem=parseFloat(quantidadeOrigemInput);if(!grupo||!alimentoOrigem||!alimentoDestino||isNaN(quantidadeOrigem)){resultadoDiv.innerText='Por favor, preencha todos os campos corretamente.';return;}let quantidadeOrigemGramas=quantidadeOrigem;if(Object.keys(unidadesUN).includes(alimentoOrigem)){quantidadeOrigemGramas=quantidadeOrigem*unidadesUN[alimentoOrigem];}const quantidadeRefOrigem=tabela[grupo][alimentoOrigem];const quantidadeRefDestino=tabela[grupo][alimentoDestino];let novaQuantidade=(quantidadeRefDestino/quantidadeRefOrigem)*quantidadeOrigemGramas;let unidade="g";if(unidadesML.includes(alimentoDestino)){unidade="ml";}else if(Object.keys(unidadesUN).includes(alimentoDestino)){unidade="unidades";novaQuantidade=novaQuantidade/unidadesUN[alimentoDestino];}let quantidadeFinal=Math.ceil(novaQuantidade);resultadoDiv.innerText=`Quantidade equivalente: ${quantidadeFinal} ${unidade} de ${alimentoDestino}`;}
   </script>
 </body>
 </html>
