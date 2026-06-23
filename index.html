@@ -6,100 +6,74 @@
   <title>Calculadora de Substituições Alimentares</title>
   
 <style>
+* {
+  box-sizing: border-box;
+}
 body {
   font-family: Arial, sans-serif;
   background-color: #ffffff;
   color: #333;
   text-align: center;
-  padding: 20px;
+  margin: 0;
+  padding: 24px 16px;
 }
 header img {
-  width: 200px;
-  margin-bottom: 2px;
+  width: 150px;
+  margin-bottom: 8px;
 }
 h1 {
   font-size: 1.8em;
+  margin: 0;
+}
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 16px;
+  width: 100%;
+  max-width: 420px;
+  margin: 32px auto 0;
+}
+select, input, button {
+  width: 100%;
+  padding: 14px 16px;
+  border-radius: 10px;
+  font-size: 1em;
+  font-family: inherit;
 }
 select, input {
-  padding: 12px;
-  margin: 8px;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 320px;
-  font-size: 1em;
+  background-color: #fff;
+}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='none' stroke='%23333' stroke-width='1.5' d='M1 1.5l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 44px;
 }
 button {
   background-color: #A6CE39;
   color: white;
-  padding: 14px 24px;
   border: none;
-  border-radius: 10px;
   cursor: pointer;
   font-weight: bold;
   font-size: 1.1em;
-  width: 90%;
-  max-width: 320px;
 }
 button:hover {
   background-color: #8ABF2D;
 }
 .resultado {
-  margin-top: 20px;
   font-size: 1.3em;
   color: #4CAF50;
 }
 @media (max-width: 600px) {
-  body {
-    padding: 10px;
-  }
   h1 {
     font-size: 1.6em;
   }
-  select, input, button {
-    font-size: 1.1em;
-  }
-  .resultado {
-    font-size: 1.4em;
-  }
 }
-
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #ffffff;
-      color: #333;
-      text-align: center;
-      padding: 20px;
-    }
-    header img {
-      width: 150px;
-      margin-bottom: 20px;
-    }
-    select, input {
-      padding: 10px;
-      margin: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      width: 80%;
-      max-width: 300px;
-    }
-    button {
-      background-color: #A6CE39;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    button:hover {
-      background-color: #8ABF2D;
-    }
-    .resultado {
-      margin-top: 20px;
-      font-size: 1.2em;
-      color: #4CAF50;
-    }
   </style>
 </head>
 <body>
@@ -108,7 +82,7 @@ button:hover {
     <h1>Calculadora de Substituições Alimentares</h1>
   </header>
 
-  <div>
+  <div class="form">
     <select id="grupo" onchange="atualizarAlimentosOrigem()">
       <option value="">Selecione o grupo alimentar</option>
       <option value="carboidratos">Carboidratos</option>
